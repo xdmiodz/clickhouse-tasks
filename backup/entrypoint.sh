@@ -23,7 +23,7 @@ function backup_partition {
     for TABLE in "${array[@]}"; do
         echo "Backuping table ${TABLE}"
         echo "SQL: ALTER TABLE ${TABLE} FREEZE PARTITION '${PARTITION}'"
-        echo "ALTER TABLE ${TABLE} FREEZE PARTITION '${PARTITION}'" | POST "http://${USERNAME}:${PASSWORD}@localhost:8123/"
+        echo "ALTER TABLE ${TABLE} FREEZE PARTITION '${PARTITION}'" | POST "http://${USERNAME}:${PASSWORD}@${ADDRESS}:8123/"
 
         local CURRENT_NUMBER=$(cat ${BACKUP_PATH}/increment.txt)
         upload_dir "${BACKUP_PATH}/${CURRENT_NUMBER}" "${S3_BACKUPS_BUCKET}/${PARTITION}/${KEY}"
